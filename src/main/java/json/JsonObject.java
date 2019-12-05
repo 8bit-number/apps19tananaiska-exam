@@ -1,5 +1,6 @@
 package json;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,15 +10,15 @@ import java.util.HashMap;
  */
 public class JsonObject extends Json {
     private JsonPair[] pairs;
+    private ArrayList<JsonPair> rezult = new ArrayList<>();
 
     public JsonObject(JsonPair... jsonPairs) {
-        this.pairs = jsonPairs;
-
+        this.rezult.addAll(Arrays.asList(jsonPairs));
     }
 
     @Override
     public String toJson() {
-        if (this.pairs.length != 0) {
+        if (this.rezult.size() != 0) {
             StringBuilder b = new StringBuilder("{");
             for (JsonPair p : this.pairs) {
                 b.append("'" + p.key + "'");
@@ -33,15 +34,22 @@ public class JsonObject extends Json {
     }
 
     public void add(JsonPair jsonPair) {
-//        todo
+        this.rezult.add(jsonPair);
     }
 
     public Json find(String name) {
-        // ToDo
+        for (JsonPair f: this.pairs){
+            if (f.key.equals(name)){
+                return f.value;
+            }
+        }
         return null;
     }
 
     public JsonObject projection(String... names) {
+//        for (String p: names){
+//            if thi
+//        }
         // ToDo
         return null;
     }
